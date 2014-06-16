@@ -23,6 +23,7 @@ class RatingValueBuilder < ModelBuilder
     @rating_value = @question.create_rating_value!(filter_rating_value_params(rating_params))
   end
 
+  # Cleans up params to avoid security breach
   def filter_rating_value_params(rating_params)
     rating_params.select { |k, _| %w(min max step).include?(k) }
   end

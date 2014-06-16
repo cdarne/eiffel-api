@@ -23,6 +23,7 @@ class SelectValueBuilder < ModelBuilder
     @select_value = @question.create_select_value!(filter_select_value_params(select_params))
   end
 
+  # Cleans up params to avoid security breach
   def filter_select_value_params(select_params)
     select_params.select { |k, _| %w(multiple).include?(k) }
   end

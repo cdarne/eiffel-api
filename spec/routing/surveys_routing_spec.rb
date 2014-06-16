@@ -18,5 +18,9 @@ RSpec.describe SurveysController, :type => :routing do
     it "routes to #destroy" do
       expect(:delete => "/surveys/1").to route_to("surveys#destroy", :id => "1")
     end
+
+    it "routes to #answer" do
+      expect(:post => "/surveys/1/answer").to route_to("surveys#answer", :id => "1")
+    end
   end
 end

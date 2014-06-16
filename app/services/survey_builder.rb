@@ -18,6 +18,7 @@ class SurveyBuilder < ModelBuilder
     @survey = Survey.create!(filter_survey_params(survey_params))
   end
 
+  # Cleans up params to avoid security breach
   def filter_survey_params(params)
     params.select { |k, _| k == "description" }
   end

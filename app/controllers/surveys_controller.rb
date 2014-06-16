@@ -4,7 +4,8 @@ class SurveysController < ApplicationController
   def index
     scope = Survey.limit(10)
 
-    if stale?(etag: scope.cache_key)
+    # Sets the etag on the response and checks it against the client request
+    if stale?(etag: scope.cache_key, public: true)
       @surveys = scope.all
       render json: @surveys
     end
@@ -15,7 +16,10 @@ class SurveysController < ApplicationController
   def show
     @survey = Survey.find(find_params)
 
-    render json: @survey if stale?(last_modified: @survey.updated_at.utc, etag: @survey.cache_key)
+    # Sets the etag and last_modified on the response and checks it against the client request
+    if stale?(last_modified: @survey.updated_at.utc, etag: @survey.cache_key, public: true)
+      render json: @survey
+    end
   end
 
   # POST /surveys
@@ -40,6 +44,19 @@ class SurveysController < ApplicationController
     head :no_content
   end
 
+  # POST /surveys/1/answer
+  # POST /surveys/1/answer.json
+  def answer
+    survey = Survey.find(find_params)
+    sa = SurveyAnswerer.new(survey)
+
+    if sa.answer(answer_params)
+      head :ok
+    else
+      render json: sa.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def find_params
@@ -47,7 +64,10 @@ class SurveysController < ApplicationController
   end
 
   def survey_params
-
     params.require(:survey).permit!
+  end
+
+  def answer_params
+    params.require(:answers).permit!
   end
 end

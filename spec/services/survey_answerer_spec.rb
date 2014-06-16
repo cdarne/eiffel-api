@@ -1,49 +1,48 @@
 require 'rails_helper'
 
-RSpec.describe ModelBuilder do
-  describe "#build" do
-    it "raise NotImplementedError when not subclassed" do
-      expect { ModelBuilder.new.build({}) }.to raise_error(NotImplementedError)
+RSpec.describe SurveyAnswerer do
+  let!(:survey) { Survey.create!(description: "desc") }
+  let!(:question) { survey.questions.create!(order: 0, description: "desc", question_type: Question::TYPE[:boolean]) }
+
+  describe "#answer" do
+    it "fails when the user id is not provided" do
+      sa = SurveyAnswerer.new(survey)
+      response = sa.answer({})
+      expect(response).to be_falsey
+      expect(sa.errors).to include("Missing 'user_id' parameter")
     end
 
-    context "subclassed" do
-      it "calls #internal_build" do
-        buidlerClass = Class.new(ModelBuilder) do
-          def internal_build(params)
-          end
-        end
-
-        builder = buidlerClass.new
-        expect(builder).to receive(:internal_build).with({test: true})
-        response = builder.build({test: true})
-        expect(response).to be_truthy
-      end
-
-      it "rescues validation errors" do
-        buidlerClass = Class.new(ModelBuilder) do
-          def internal_build(params)
-            Survey.create!
-          end
-        end
-
-        builder = buidlerClass.new
-        response = builder.build({})
-        expect(builder.errors).to be_a_kind_of(ActiveModel::Errors)
+    [nil, {}, []].each do |value_params|
+      it "fails when the params don't contain valid 'values' params (#{value_params.class})" do
+        sa = SurveyAnswerer.new(survey)
+        response = sa.answer({user_id: "42", values: value_params})
         expect(response).to be_falsey
+        expect(sa.errors).to include("Missing or invalid 'values' params")
       end
+    end
 
-      it "rescues validation errors" do
-        buidlerClass = Class.new(ModelBuilder) do
-          def internal_build(params)
-            raise ArgumentError, "invalid"
-          end
-        end
+    it "fails when a validation error is raised" do
+      answer = Answer.new
+      answer.valid?
+      answer_strategy = instance_double("BooleanAnswerStrategy")
+      expect(answer_strategy).to receive(:answer).with("42", "plop").and_raise(ActiveRecord::RecordInvalid.new(answer))
+      expect(AnswerStrategy).to receive(:factory).and_return(answer_strategy)
 
-        builder = buidlerClass.new
-        response = builder.build({})
-        expect(builder.errors).to eq(["invalid"])
-        expect(response).to be_falsey
-      end
+      sa = SurveyAnswerer.new(survey)
+      response = sa.answer({user_id: "42", values: ["plop"]})
+      expect(response).to be_falsey
+      expect(sa.errors).to include(:user_id)
+    end
+
+    it "fails when a validation error is raised" do
+      answer_strategy = instance_double("BooleanAnswerStrategy")
+      expect(answer_strategy).to receive(:answer).with("42", "plop")
+      expect(AnswerStrategy).to receive(:factory).and_return(answer_strategy)
+
+      sa = SurveyAnswerer.new(survey)
+      response = sa.answer({user_id: "42", values: ["plop"]})
+      expect(response).to be_truthy
+      expect(sa.errors).to be_empty
     end
   end
 end

@@ -21,6 +21,7 @@ class QuestionBuilder < ModelBuilder
   private
 
   def create_question(question_params)
+    # If there's a 'dependent_question' param provided, we try to find the referenced question
     if question_params[:dependent_question]
       dependent_question = @survey.questions.find_by_order(question_params[:dependent_question])
       raise ArgumentError, "Dependent question ##{question_params[:dependent_question]} no found" unless dependent_question
@@ -29,6 +30,7 @@ class QuestionBuilder < ModelBuilder
     @question = @survey.questions.create!(filter_question_params(question_params))
   end
 
+  # Cleans up params to avoid security breach
   def filter_question_params(params)
     params.select { |k, _| %w(description weight question_type order dependent_question_id).include?(k) }
   end

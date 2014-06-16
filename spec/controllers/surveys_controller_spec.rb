@@ -82,4 +82,32 @@ RSpec.describe SurveysController, :type => :controller do
       }.to change(Survey, :count).by(-1)
     end
   end
+
+  describe "POST answer" do
+    describe "with valid params" do
+      it "creates an answer" do
+        survey = Survey.create! valid_survey_attributes
+        survey.questions.create!(order: 0, description: "desc", question_type: Question::TYPE[:boolean])
+        expect {
+          post :answer, {:id => survey.to_param, answers: {user_id: 42, values: [true]}}, valid_session
+        }.to change(Answer, :count).by(1)
+      end
+
+      it "responds OK" do
+        survey = Survey.create! valid_survey_attributes
+        survey.questions.create!(order: 0, description: "desc", question_type: Question::TYPE[:boolean])
+        post :answer, {:id => survey.to_param, answers: {user_id: 42, values: [true]}}, valid_session
+        assert_response :ok
+      end
+    end
+
+    describe "with invalid params" do
+      it "responds unprocessable_entity" do
+        survey = Survey.create! valid_survey_attributes
+        survey.questions.create!(order: 0, description: "desc", question_type: Question::TYPE[:boolean])
+        post :answer, {:id => survey.to_param, answers: {user_id: 42}}, valid_session
+        assert_response :unprocessable_entity
+      end
+    end
+  end
 end

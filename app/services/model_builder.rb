@@ -1,3 +1,4 @@
+# Abstract class used to define how to build survey/question/value models
 class ModelBuilder
   attr_reader :errors
 
