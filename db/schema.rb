@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140616002628) do
   create_table "questions", force: true do |t|
     t.integer  "order"
     t.text     "description"
-    t.integer  "weight"
+    t.integer  "weight",                default: 1
     t.integer  "survey_id"
     t.integer  "dependent_question_id"
     t.string   "question_type"
