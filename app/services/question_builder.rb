@@ -1,7 +1,7 @@
 class QuestionBuilder < ModelBuilder
 
   def initialize(survey)
-    super
+    super()
     @survey = survey
   end
 

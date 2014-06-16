@@ -6,6 +6,7 @@ class ModelBuilder
   end
 
   def build(params)
+    params = HashWithIndifferentAccess.new(params)
     begin
       internal_build(params)
     rescue ActiveRecord::RecordInvalid => e

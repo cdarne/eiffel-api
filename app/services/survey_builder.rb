@@ -15,7 +15,11 @@ class SurveyBuilder < ModelBuilder
   private
 
   def create_survey(survey_params)
-    @survey = Survey.create!(survey_params)
+    @survey = Survey.create!(filter_survey_params(survey_params))
+  end
+
+  def filter_survey_params(params)
+    params.select { |k, _| k == "description" }
   end
 
   def check_questions_parameter(questions_params)
@@ -29,7 +33,7 @@ class SurveyBuilder < ModelBuilder
       qb = QuestionBuilder.new(@survey)
       unless qb.build(question_params)
         @errors = qb.errors
-        return
+        raise ActiveRecord::Rollback
       end
     end
   end
