@@ -1,0 +1,33 @@
+{
+    "survey": {
+        "description": "Template de Questionnaire pour l'association française de réputation des parisiens émigrés dans le monde. Copyright SondageMieux Inc.",
+        "questions": [
+            {
+                "weight": 1,
+                "description": "Dans le camembert graphique suivant, saisissez la proportion de chaque qualité que vous associez à un parisien :",
+                "question_type": "ratio",
+                "ratio_value": {
+                    "values": [
+                        "sympathique",
+                        "joyeux",
+                        "chaleureux",
+                        "généreux"
+                    ]
+                }
+            },
+            {
+                "weight": 1,
+                "description": "Dans le camembert graphique suivant, saisissez la proportion de chaque défaut que vous associez à un parisien :",
+                "question_type": "ratio",
+                "ratio_value": {
+                    "values": [
+                        "bavard",
+                        "ennuyeux",
+                        "stressé",
+                        "prétentieux"
+                    ]
+                }
+            }
+        ]
+    }
+}

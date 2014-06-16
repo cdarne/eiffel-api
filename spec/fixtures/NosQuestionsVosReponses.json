@@ -1,0 +1,133 @@
+{
+    "survey": {
+        "description": "Template de Questionnaire pour l'association française de réputation des parisiens émigrés dans le monde. Copyright NosQuestions, VosRéponses Inc.",
+        "questions": [
+            {
+                "weight": 1,
+                "description": "Connaissez-vous des français ?",
+                "question_type": "boolean"
+            },
+            {
+                "weight": 1,
+                "description": "Connaissez-vous des français résidant à Paris ?",
+                "question_type": "boolean"
+            },
+            {
+                "weight": 1,
+                "description": "Combien de parisiens connaissez-vous ?",
+                "question_type": "select",
+                "select_value": {
+                    "multiple": false,
+                    "values": [
+                        {
+                            "description": "de 1 à 5",
+                            "score": 1
+                        },
+                        {
+                            "description": "de 6 à 10",
+                            "score": 2
+                        },
+                        {
+                            "description": "de 11 à 50",
+                            "score": 3
+                        },
+                        {
+                            "description": "plus de 50",
+                            "score": 2
+                        }
+                    ]
+                }
+            },
+            {
+                "weight": 1,
+                "description": "Sur tous les parisiens que vous connaissez, pour les {{questions[3].values[responses[3]]}} personnes les plus amicales, notez chaque de 1 à 5 selon votre appréciation",
+                "question_type": "select",
+                "select_value": {
+                    "multiple": false,
+                    "values": [
+                        {
+                            "description": "très amical, fait partie de ma famille",
+                            "score": 5
+                        },
+                        {
+                            "description": "amical",
+                            "score": 4
+                        },
+                        {
+                            "description": "neutre",
+                            "score": 3
+                        },
+                        {
+                            "description": "assez inamical",
+                            "score": 2
+                        },
+                        {
+                            "description": "odieux la plupart du temps",
+                            "score": 1
+                        }
+                    ]
+                }
+            },
+            {
+                "weight": 1,
+                "description": "Sur tous les autres parisiens que vous connaissez, notez chaque de 1 à 5 selon votre appréciation",
+                "question_type": "select",
+                "select_value": {
+                    "multiple": false,
+                    "values": [
+                        {
+                            "description": "très amical, fait partie de ma famille",
+                            "score": 5
+                        },
+                        {
+                            "description": "amical",
+                            "score": 4
+                        },
+                        {
+                            "description": "neutre",
+                            "score": 3
+                        },
+                        {
+                            "description": "assez inamical",
+                            "score": 2
+                        },
+                        {
+                            "description": "odieux la plupart du temps",
+                            "score": 1
+                        }
+                    ]
+                }
+            },
+            {
+                "weight": 1,
+                "description": "Selon votre perception, notez de 1 à 5 votre appréciation de la réputation des parisiens (en général)",
+                "question_type": "select",
+                "select_value": {
+                    "multiple": false,
+                    "values": [
+                        {
+                            "description": "très amical, fait partie de ma famille",
+                            "score": 5
+                        },
+                        {
+                            "description": "amical",
+                            "score": 4
+                        },
+                        {
+                            "description": "neutre",
+                            "score": 3
+                        },
+                        {
+                            "description": "assez inamical",
+                            "score": 2
+                        },
+                        {
+                            "description": "odieux la plupart du temps",
+                            "score": 1
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

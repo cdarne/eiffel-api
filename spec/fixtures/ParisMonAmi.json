@@ -1,0 +1,40 @@
+{
+    "survey": {
+        "description": "Template de Questionnaire pour l'association française de réputation des parisiens émigrés dans le monde. Copyright ParisMonAmi Inc.",
+        "questions": [
+            {
+                "weight": 1,
+                "description": "Combien de parisiens avez-vous dans vos connaissances ?",
+                "question_type": "input"
+            },
+            {
+                "weight": 1,
+                "description": "Combien de parisiens considérez-vous comme plus que de simples connaissance ?",
+                "question_type": "input"
+            },
+            {
+                "weight": 1,
+                "description": "Selon vos connaissances, notez votre appréciation des parisiens :",
+                "question_type": "rating",
+                "rating_value": {
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "values": [
+                        "respect des autres",
+                        "ponctualité",
+                        "politesse",
+                        "acueillant",
+                        "indifférent",
+                        "français"
+                    ]
+                }
+            },
+            {
+                "weight": 1,
+                "description": "Adopteriez vous un parisiens comme ami ?",
+                "question_type": "boolean"
+            }
+        ]
+    }
+}
