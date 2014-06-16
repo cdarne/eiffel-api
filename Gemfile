@@ -5,6 +5,10 @@ gem 'rails-api'
 gem 'foreigner'
 gem 'active_model_serializers'
 
+# JSON
+gem 'multi_json'
+gem 'oj'
+
 group :development do
   gem 'spring'
   gem 'pry-rails'
