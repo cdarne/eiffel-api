@@ -63,7 +63,7 @@ class QuestionBuilder < ModelBuilder
       attr_reader :builder
 
       def check_parameters(question_params)
-        if !question_params[:#{value_key}].kind_of?(Array) || question_params[:#{value_key}].empty?
+        if !question_params[:#{value_key}].kind_of?(Hash) || question_params[:#{value_key}].empty?
           raise ArgumentError, "Missing or invalid '#{value_key}' params"
         end
       end

@@ -61,7 +61,7 @@ RSpec.describe QuestionBuilder do
           qb = QuestionBuilder.new(survey)
           params = valid_params
           params[:question_type] = value_type
-          params[:"#{value_type}_value"] = [{}]
+          params[:"#{value_type}_value"] = {test: true}
 
           builder = instance_double(builder_class_name)
           expect(builder_class).to receive(:new).and_return(builder)
@@ -79,7 +79,7 @@ RSpec.describe QuestionBuilder do
           qb = QuestionBuilder.new(survey)
           params = valid_params
           params[:question_type] = value_type
-          params[:"#{value_type}_value"] = [{}]
+          params[:"#{value_type}_value"] = {test: true}
 
           builder = instance_double(builder_class_name)
           expect(builder_class).to receive(:new).and_return(builder)
