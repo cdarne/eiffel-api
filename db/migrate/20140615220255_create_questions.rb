@@ -3,7 +3,7 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
       t.integer :order
       t.text :description
-      t.integer :weight
+      t.integer :weight, default: 1
       t.references :survey, index: true
       t.references :dependent_question, index: true
       t.string :question_type
