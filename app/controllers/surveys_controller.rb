@@ -2,9 +2,12 @@ class SurveysController < ApplicationController
   # GET /surveys
   # GET /surveys.json
   def index
-    @surveys = Survey.all
+    scope = Survey.limit(10)
 
-    render json: @surveys
+    if stale?(etag: scope.cache_key)
+      @surveys = scope.all
+      render json: @surveys
+    end
   end
 
   # GET /surveys/1
@@ -12,7 +15,7 @@ class SurveysController < ApplicationController
   def show
     @survey = Survey.find(find_params)
 
-    render json: @survey
+    render json: @survey if stale?(last_modified: @survey.updated_at.utc, etag: @survey.cache_key)
   end
 
   # POST /surveys

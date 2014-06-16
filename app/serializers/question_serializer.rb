@@ -1,5 +1,5 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :description, :dependent_question, :question_type
+  attributes :description, :dependent_question, :question_type
 
   has_one :select_value
   has_one :rating_value
