@@ -6,16 +6,15 @@ class ModelBuilder
   end
 
   def build(params)
-    internal_build(params)
-  rescue ActiveRecord::RecordInvalid => e
-    @errors = e.record.errors
-  rescue ArgumentError => e
-    @errors = [e.message]
-  ensure
+    begin
+      internal_build(params)
+    rescue ActiveRecord::RecordInvalid => e
+      @errors = e.record.errors
+    rescue ArgumentError => e
+      @errors = [e.message]
+    end
     @errors.empty?
   end
-
-  BuildError = Class.new(StandardError)
 
   protected
 
