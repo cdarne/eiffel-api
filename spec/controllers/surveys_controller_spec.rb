@@ -5,8 +5,14 @@ RSpec.describe SurveysController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Survey. As you add validations to Survey, be sure to
   # adjust the attributes here as well.
+  let(:valid_survey_attributes) {
+    {description: "survey description"}
+  }
+
   let(:valid_attributes) {
-    {description: "A description"}
+    valid_survey_attributes.merge(questions:
+                                      [{description: "question description",
+                                        question_type: Question::TYPE[:boolean]}])
   }
 
   let(:invalid_attributes) {
@@ -20,7 +26,7 @@ RSpec.describe SurveysController, :type => :controller do
 
   describe "GET index" do
     it "assigns all surveys as @surveys" do
-      survey = Survey.create! valid_attributes
+      survey = Survey.create! valid_survey_attributes
       get :index, {}, valid_session
       expect(assigns(:surveys)).to eq([survey])
     end
@@ -28,7 +34,7 @@ RSpec.describe SurveysController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested survey as @survey" do
-      survey = Survey.create! valid_attributes
+      survey = Survey.create! valid_survey_attributes
       get :show, {:id => survey.to_param}, valid_session
       expect(assigns(:survey)).to eq(survey)
     end
@@ -58,7 +64,7 @@ RSpec.describe SurveysController, :type => :controller do
     describe "with invalid params" do
       it "assigns a newly created but unsaved survey as @survey" do
         post :create, {:survey => invalid_attributes}, valid_session
-        expect(assigns(:survey)).to be_a_new(Survey)
+        expect(assigns(:survey)).to be_nil
       end
 
       it "re-renders the 'new' template" do
@@ -68,45 +74,9 @@ RSpec.describe SurveysController, :type => :controller do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      let(:new_attributes) {
-        {description: "A new description"}
-      }
-
-      it "updates the requested survey" do
-        survey = Survey.create! valid_attributes
-        put :update, {:id => survey.to_param, :survey => new_attributes}, valid_session
-        survey.reload
-        expect(survey.description).to eq("A new description")
-      end
-
-      it "assigns the requested survey as @survey" do
-        survey = Survey.create! valid_attributes
-        put :update, {:id => survey.to_param, :survey => valid_attributes}, valid_session
-        expect(assigns(:survey)).to eq(survey)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the survey as @survey" do
-        survey = Survey.create! valid_attributes
-        put :update, {:id => survey.to_param, :survey => invalid_attributes}, valid_session
-        expect(assigns(:survey)).to eq(survey)
-      end
-
-      it "re-renders the 'edit' template" do
-        survey = Survey.create! valid_attributes
-        expect_any_instance_of(Survey).to receive(:update).and_return(false)
-        put :update, {:id => survey.to_param, :survey => invalid_attributes}, valid_session
-        assert_response :unprocessable_entity
-      end
-    end
-  end
-
   describe "DELETE destroy" do
     it "destroys the requested survey" do
-      survey = Survey.create! valid_attributes
+      survey = Survey.create! valid_survey_attributes
       expect {
         delete :destroy, {:id => survey.to_param}, valid_session
       }.to change(Survey, :count).by(-1)
