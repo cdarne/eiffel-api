@@ -13,6 +13,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :survey
   belongs_to :dependent_question, class_name: "Question"
+  has_many :answers
 
   # Composite values
   has_one :select_value
