@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionBuilder do
   describe "#build" do
-    let(:survey) { Survey.create(description: "desc") }
+    let(:survey) { Survey.create!(description: "desc") }
     let(:valid_params) {
       {description: "test question", order: 1, question_type: Question::TYPE.values.first}
     }
@@ -17,11 +17,11 @@ RSpec.describe QuestionBuilder do
     it "fails when the dependent question is provided but not found" do
       qb = QuestionBuilder.new(survey)
       params = valid_params
-      params[:dependent_question] = 1
-      params[:order] = 2
+      params[:dependent_question] = 0
+      params[:order] = 1
       qb.build(valid_params)
       expect(qb.question).to be_nil
-      expect(qb.errors).to include("Dependent question #1 no found")
+      expect(qb.errors).to include("Dependent question #0 no found")
     end
 
     %w(boolean input).each do |value_type|

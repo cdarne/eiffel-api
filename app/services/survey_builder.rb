@@ -29,7 +29,7 @@ class SurveyBuilder < ModelBuilder
   end
 
   def build_questions(questions_params)
-    order = 1
+    order = 0
     questions_params.each do |question_params|
       question_params[:order] = order
       qb = QuestionBuilder.new(@survey)

@@ -24,7 +24,6 @@ class SurveysController < ApplicationController
       @survey = builder.survey
       render json: @survey, status: :created, location: @survey
     else
-      pp builder.errors
       render json: builder.errors, status: :unprocessable_entity
     end
   end

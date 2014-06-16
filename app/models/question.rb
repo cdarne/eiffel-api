@@ -3,10 +3,10 @@ class Question < ActiveRecord::Base
 
   TYPE = {
       boolean: "boolean", # yes/no response
-      select: "select",   # select a response in a list
-      input: "input",     # direct input of the response
-      rating: "rating",   # rate on a scale
-      ratio: "ratio"      # balance ratios between different values
+      select: "select", # select a response in a list
+      input: "input", # direct input of the response
+      rating: "rating", # rate on a scale
+      ratio: "ratio" # balance ratios between different values
   }
 
   # Associations
@@ -22,6 +22,7 @@ class Question < ActiveRecord::Base
   # Validations
 
   validates :question_type, inclusion: TYPE.values
-  validates :weight, :order, numericality: {only_integer: true, greater_than: 0}
+  validates :order, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :weight, numericality: {only_integer: true, greater_than: 0}
   validates :survey_id, :description, presence: true
 end

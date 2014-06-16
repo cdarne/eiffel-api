@@ -6,5 +6,5 @@ class RatingValueEntry < ActiveRecord::Base
   # Validations
 
   validates :rating_value_id, :description, presence: true
-  validates :order, numericality: {only_integer: true, greater_than: 0}
+  validates :order, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 end

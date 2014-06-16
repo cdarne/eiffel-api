@@ -44,12 +44,12 @@ RSpec.describe SurveyBuilder do
       # 1st question builder
       question_builder = instance_double("QuestionBuilder")
       expect(QuestionBuilder).to receive(:new).and_return(question_builder)
-      expect(question_builder).to receive(:build).with(description: "question #1", order: 1).and_return(true)
+      expect(question_builder).to receive(:build).with(description: "question #1", order: 0).and_return(true)
 
       # 2nd question builder
       question_builder = instance_double("QuestionBuilder")
       expect(QuestionBuilder).to receive(:new).and_return(question_builder)
-      expect(question_builder).to receive(:build).with(description: "question #2", order: 2).and_return(true)
+      expect(question_builder).to receive(:build).with(description: "question #2", order: 1).and_return(true)
 
       sb = SurveyBuilder.new
       sb.build({description: "survey desc", questions: [{description: "question #1"}, {description: "question #2"}]})
