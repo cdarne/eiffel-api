@@ -39,5 +39,20 @@ RSpec.describe SurveyBuilder do
       expect(sb.survey).not_to be_persisted
       expect(sb.errors).to eq(["invalid"])
     end
+
+    it "handles questions order" do
+      # 1st question builder
+      question_builder = instance_double("QuestionBuilder")
+      expect(QuestionBuilder).to receive(:new).and_return(question_builder)
+      expect(question_builder).to receive(:build).with(description: "question #1", order: 1).and_return(true)
+
+      # 2nd question builder
+      question_builder = instance_double("QuestionBuilder")
+      expect(QuestionBuilder).to receive(:new).and_return(question_builder)
+      expect(question_builder).to receive(:build).with(description: "question #2", order: 2).and_return(true)
+
+      sb = SurveyBuilder.new
+      sb.build({description: "survey desc", questions: [{description: "question #1"}, {description: "question #2"}]})
+    end
   end
 end

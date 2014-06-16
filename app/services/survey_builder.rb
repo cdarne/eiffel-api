@@ -29,12 +29,15 @@ class SurveyBuilder < ModelBuilder
   end
 
   def build_questions(questions_params)
+    order = 1
     questions_params.each do |question_params|
+      question_params[:order] = order
       qb = QuestionBuilder.new(@survey)
       unless qb.build(question_params)
         @errors = qb.errors
         raise ActiveRecord::Rollback
       end
+      order += 1
     end
   end
 end
