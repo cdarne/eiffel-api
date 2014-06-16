@@ -10,13 +10,13 @@
             {
                 "weight": 1,
                 "description": "Connaissez-vous des français résidant à Paris ?",
-                "dependent_question": 1,
+                "dependent_question": 0,
                 "question_type": "boolean"
             },
             {
                 "weight": 1,
                 "description": "Combien de parisiens connaissez-vous ?",
-                "dependent_question": 2,
+                "dependent_question": 1,
                 "question_type": "select",
                 "select_value": {
                     "multiple": false,
@@ -43,7 +43,7 @@
             {
                 "weight": 1,
                 "description": "Sur tous les parisiens que vous connaissez, pour les {{questions[3].values[responses[3]]}} personnes les plus amicales, notez chaque de 1 à 5 selon votre appréciation",
-                "dependent_question": 3,
+                "dependent_question": 2,
                 "question_type": "select",
                 "select_value": {
                     "multiple": false,
@@ -74,7 +74,7 @@
             {
                 "weight": 1,
                 "description": "Sur tous les autres parisiens que vous connaissez, notez chaque de 1 à 5 selon votre appréciation",
-                "dependent_question": 3,
+                "dependent_question": 2,
                 "question_type": "select",
                 "select_value": {
                     "multiple": false,
@@ -105,7 +105,7 @@
             {
                 "weight": 1,
                 "description": "Selon votre perception, notez de 1 à 5 votre appréciation de la réputation des parisiens (en général)",
-                "dependent_question": 3,
+                "dependent_question": 2,
                 "question_type": "select",
                 "select_value": {
                     "multiple": false,
