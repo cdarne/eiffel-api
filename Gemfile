@@ -26,4 +26,5 @@ end
 
 group :production do
   gem 'passenger'
+  gem 'pg'
 end
