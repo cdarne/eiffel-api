@@ -8,6 +8,7 @@ gem 'active_model_serializers'
 # Memcached
 gem 'dalli'
 gem 'kgio'
+gem 'rack-cache'
 
 # JSON
 gem 'multi_json'
