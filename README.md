@@ -290,7 +290,7 @@ curl -X POST -H "Content-Type: application/json" -d @spec/fixtures/NosQuestionsV
 curl -X DELETE http://eiffel-api.herokuapp.com/surveys/4.json
 ```
 
-### Répondre à un sondage
+### Répondre à un sondage (avec un jeu de données)
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d @spec/fixtures/NosQuestionsVosReponses_response.json http://eiffel-api.herokuapp.com/surveys/1/answer.json
@@ -300,20 +300,20 @@ curl -X POST -H "Content-Type: application/json" -d @spec/fixtures/NosQuestionsV
 ## Organisation du code
 
 Ce projet adopte l'organisation classique d'un projet rails. Le code métier/fonctionnel le plus important se
-situe dans /app. On y retrouve:
+situe dans `/app`. On y retrouve:
 
- * controllers: le controller qui s'occupe de faire le lien entre modèles et request
- * models: classes gérant la persistance, les validations simple et les relations entre modèles
- * serializers: la partie 'vue' de l'API, ces classes décrivent comment les modèles doivent être transformés en JSON
- * services: classes contenant la logique métier de l'application. Le but est de séparer le plus possible le code gèrant
-             la persistance (modèles) et le requêtage (controller). Cela permet une conception classique orientée objet
-             et découplée du framework rails : plus facile à tester, à maintenir, à réutiliser le code
-             dans d'autres projets.
+ * `controllers` : le controller qui s'occupe de faire le lien entre modèles et request
+ * `models` : classes gérant la persistance, les validations simple et les relations entre modèles
+ * `serializers` : la partie 'vue' de l'API, ces classes décrivent comment les modèles doivent être transformés en JSON
+ * `services`: classes contenant la logique métier de l'application. Le but est de séparer le plus possible le code gèrant
+               la persistance (modèles) et le requêtage (controller). Cela permet une conception classique orientée objet
+               et découplée du framework rails : plus facile à tester, à maintenir, à réutiliser le code
+               dans d'autres projets.
 
-Enfin concernant le modèle de données, il y a le répertoire /db qui contient:
- * migrate: les migrations nécessaire à la création du schema de la DB, elle sont exécutées dans l'ordre des noms de fichiers
- * schema.rb: ce fichier synthétise toute la structure de base
- * seeds.rb: des données d'exemple
+Enfin concernant le modèle de données, il y a le répertoire `/db` qui contient:
+ * `migrate` : les migrations nécessaire à la création du schema de la DB, elle sont exécutées dans l'ordre des noms de fichiers
+ * `schema.rb` : ce fichier synthétise toute la structure de base
+ * `seeds.rb` : des données d'exemple
  
  
 ## Evolutions (scoring)
