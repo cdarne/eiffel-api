@@ -6,6 +6,6 @@ class CreateRatioValues < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_foreign_key :ratio_values, :question, dependent: :delete
+    add_foreign_key :ratio_values, :questions, dependent: :delete
   end
 end

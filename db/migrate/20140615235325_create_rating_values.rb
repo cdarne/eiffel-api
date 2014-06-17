@@ -9,6 +9,6 @@ class CreateRatingValues < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_foreign_key :rating_values, :question, dependent: :delete
+    add_foreign_key :rating_values, :questions, dependent: :delete
   end
 end
