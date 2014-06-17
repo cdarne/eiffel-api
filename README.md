@@ -65,7 +65,7 @@ L'API est alors disponible à l'URL [http://localhost:3000](http://localhost:300
 
 ## Tests unitaires
 
-La suite de tests RSPec est disponible dans le repertoire /spec. Pour lancer les tests:
+La suite de tests RSpec est disponible dans le repertoire `/spec`. Pour lancer les tests:
 
 ```bash
 $ rspec spec
@@ -73,7 +73,7 @@ $ rspec spec
 
 ## Tests manuels
 
-Des jeux de données sont situés dans le répertoire /spec/fixtures. Ces fichiers JSON
+Des jeux de données sont situés dans le répertoire `/spec/fixtures`. Ces fichiers JSON
 représente la modélisation des sondages de l'énoncé, ainsi que des exemples de réponses.
 
 Voici les actions possibles avec l'API:
