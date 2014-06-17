@@ -26,4 +26,6 @@ class Question < ActiveRecord::Base
   validates :order, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   validates :weight, numericality: {only_integer: true, greater_than: 0}
   validates :survey_id, :description, presence: true
+
+  default_scope { order(:order) }
 end

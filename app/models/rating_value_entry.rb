@@ -7,4 +7,6 @@ class RatingValueEntry < ActiveRecord::Base
 
   validates :rating_value_id, :description, presence: true
   validates :order, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+
+  default_scope { order(:order) }
 end

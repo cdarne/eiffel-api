@@ -9,4 +9,6 @@ class AnswerValueEntry < ActiveRecord::Base
 
   # value will be saved to the database as an object, and retrieved as the same object
   serialize :value
+
+  default_scope { order(:id) }
 end
