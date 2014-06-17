@@ -7,6 +7,6 @@ class CreateSelectValues < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_foreign_key :select_values, :question, dependent: :delete
+    add_foreign_key :select_values, :questions, dependent: :delete
   end
 end
