@@ -5,6 +5,10 @@ gem 'rails-api'
 gem 'foreigner'
 gem 'active_model_serializers'
 
+# Memcached
+gem 'dalli'
+gem 'kgio'
+
 # JSON
 gem 'multi_json'
 gem 'oj'
@@ -27,4 +31,6 @@ end
 group :production do
   gem 'passenger'
   gem 'pg'
+  gem 'rails_12factor'
+  gem 'memcachier'
 end
